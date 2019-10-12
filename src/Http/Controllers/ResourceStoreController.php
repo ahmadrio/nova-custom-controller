@@ -28,7 +28,7 @@ class ResourceStoreController extends Controller
                 $request, $resource::newModel()
             );
 
-            $resource::beforeCreated($request);
+            $resource::beforeCreated($request, $model);
 
             if ($request->viaRelationship()) {
                 $request->findParentModelOrFail()
@@ -45,7 +45,7 @@ class ResourceStoreController extends Controller
             return $model;
         });
 
-        $resource::afterCreated($request);
+        $resource::afterCreated($request, $model);
 
         return response()->json([
             'id' => $model->getKey(),

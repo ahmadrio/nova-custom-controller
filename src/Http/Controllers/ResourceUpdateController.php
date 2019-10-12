@@ -34,7 +34,7 @@ class ResourceUpdateController extends Controller
 
             [$model, $callbacks] = $resource::fillForUpdate($request, $model);
 
-            $resource::beforeUpdated($request);
+            $resource::beforeUpdated($request, $model);
 
             ActionEvent::forResourceUpdate($request->user(), $model)->save();
 
@@ -45,7 +45,7 @@ class ResourceUpdateController extends Controller
             return $model;
         });
 
-        $resource::afterUpdated($request);
+        $resource::afterUpdated($request, $model);
 
         return response()->json([
             'id' => $model->getKey(),

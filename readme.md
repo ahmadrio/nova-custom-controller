@@ -55,33 +55,37 @@ class User extends Resource
     /**
      * Before updated in controller
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Database\Eloquent\Model $model
      */
-    public static function beforeUpdated(Request $request)
+    public static function beforeUpdated(Request $request, Model $model)
     {}
 
     /**
      * After updated in controller
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Database\Eloquent\Model $model
      */
-    public static function afterUpdated(Request $request)
+    public static function afterUpdated(Request $request, Model $model)
     {}
 
     /**
      * Before created in controller
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Database\Eloquent\Model $model
      */
-    public static function beforeCreated(Request $request)
+    public static function beforeCreated(Request $request, Model $model)
     {}
 
     /**
      * After created in controller
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Database\Eloquent\Model $model
      */
-    public static function afterCreated(Request $request)
+    public static function afterCreated(Request $request, Model $model)
     {}
 }
 ```
