@@ -1,0 +1,31 @@
+{
+    "name": "dot-nova/nova-custom-controllers",
+    "description": "Make custom controller in Laravel Nova",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "authors": [
+        {
+            "name": "Ahmad Rio",
+            "email": "ahmadrio28asia@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DotNova\\NovaCustomControllers\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DotNova\\NovaCustomControllers\\NovaCustomControllersProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
