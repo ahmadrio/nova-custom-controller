@@ -40,12 +40,12 @@ class ResourceUpdateController extends Controller
 
             $model->save();
 
+            $resource::afterUpdated($request, $model);
+
             collect($callbacks)->each->__invoke();
 
             return $model;
         });
-
-        $resource::afterUpdated($request, $model);
 
         return response()->json([
             'id' => $model->getKey(),

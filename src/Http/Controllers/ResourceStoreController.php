@@ -40,12 +40,12 @@ class ResourceStoreController extends Controller
 
             ActionEvent::forResourceCreate($request->user(), $model)->save();
 
+            $resource::afterCreated($request, $model);
+
             collect($callbacks)->each->__invoke();
 
             return $model;
         });
-
-        $resource::afterCreated($request, $model);
 
         return response()->json([
             'id' => $model->getKey(),
