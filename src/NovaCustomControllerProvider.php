@@ -1,6 +1,6 @@
 <?php
 
-namespace PtDotPlayground\NovaCustomControllers;
+namespace PtDotPlayground\NovaCustomController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
