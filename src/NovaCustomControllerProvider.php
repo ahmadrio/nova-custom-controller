@@ -5,7 +5,7 @@ namespace PtDotPlayground\NovaCustomControllers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
-class NovaCustomControllersProvider extends ServiceProvider
+class NovaCustomControllerProvider extends ServiceProvider
 {
     /**
      * This namespace is applied to your controller routes.
@@ -14,7 +14,7 @@ class NovaCustomControllersProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'PtDotPlayground\NovaCustomControllers\Http\Controllers';
+    protected $namespace = 'PtDotPlayground\NovaCustomController\Http\Controllers';
 
     /**
      * Register services.

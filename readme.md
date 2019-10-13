@@ -1,4 +1,4 @@
-# Laravel Nova Custom Controllers
+# Laravel Nova Custom Controller
 
 **Package Nova Custom Controller** berfungsi untuk mengolah request tanpa perlu membuat controller baru, karna fitur ini sudah otomatis meng-override controller pada Laravel Nova anda.
 
@@ -15,21 +15,21 @@
 2. Clone repository ini di folder `packages/`
 
 ```
-~packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controllers.git
+~packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controller.git
 ```
 
 3. Tambahkan line `composer.json`
 
 ```json
 "require": {
-    "pt-dot-playground/nova-custom-controllers": "*"
+    "pt-dot-playground/nova-custom-controller": "*"
 },
 ...
 "repositories": [
     ...
     {
         "type": "path",
-        "url": "./packages/nova-custom-controllers"
+        "url": "./packages/nova-custom-controller"
     }
 ]
 ```
@@ -43,11 +43,11 @@
 
 ```php
 ...
-use PtDotPlayground\NovaCustomControllers\Traits\NovaCustomControllers;
+use PtDotPlayground\NovaCustomController\Traits\NovaCustomEvents;
 
 abstract class Resource extends NovaResource
 {
-    use NovaCustomControllers;
+    use NovaCustomEvents;
     
     ...
 }

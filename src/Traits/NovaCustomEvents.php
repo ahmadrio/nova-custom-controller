@@ -1,11 +1,11 @@
 <?php
 
-namespace PtDotPlayground\NovaCustomControllers\Traits;
+namespace PtDotPlayground\NovaCustomController\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-trait NovaCustomControllers
+trait NovaCustomEvents
 {
     /**
      * Before updated in controller
