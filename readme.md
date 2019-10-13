@@ -12,10 +12,10 @@
 
 1. Buat folder di proyek anda `packages/`
 
-2. Clone repository ini di folder `packages/`
+2. Clone repository ini di folder `packages/` namun dengan parameter folder `NovaCustomController`
 
 ```
-~packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controller.git
+~packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controller.git NovaCustomController
 ```
 
 3. Tambahkan line `composer.json`
@@ -29,7 +29,7 @@
     ...
     {
         "type": "path",
-        "url": "./packages/nova-custom-controller"
+        "url": "./packages/NovaCustomController"
     }
 ]
 ```
