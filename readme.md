@@ -10,7 +10,15 @@
 
 ### Cara Install:
 
-1. Tambahkan line `composer.json`
+1. Buat folder di proyek anda `packages/`
+
+2. Clone repository ini di folder `packages/`
+
+```
+~packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controllers.git
+```
+
+3. Tambahkan line `composer.json`
 
 ```json
 "require": {
@@ -20,14 +28,14 @@
 "repositories": [
     ...
     {
-        "type": "git",
-        "url": "https://gitlab.com/pt-dot-playground/nova-custom-controllers"
+        "type": "path",
+        "url": "./packages/nova-custom-controllers"
     }
 ]
 ```
 
-2. Kemudian jalankan command: `composer update`
-3. Selesai
+4. Kemudian jalankan command: `composer update`
+5. Selesai
 
 ### Cara Penggunaan:
 
