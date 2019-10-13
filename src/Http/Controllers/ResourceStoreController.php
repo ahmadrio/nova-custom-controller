@@ -1,6 +1,6 @@
 <?php
 
-namespace DotNova\NovaCustomControllers\Http\Controllers;
+namespace PtDotPlayground\NovaCustomControllers\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;

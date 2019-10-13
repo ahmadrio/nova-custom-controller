@@ -1,6 +1,6 @@
 <?php
 
-namespace DotNova\NovaCustomControllers;
+namespace PtDotPlayground\NovaCustomControllers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -14,7 +14,7 @@ class NovaCustomControllersProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'DotNova\NovaCustomControllers\Http\Controllers';
+    protected $namespace = 'PtDotPlayground\NovaCustomControllers\Http\Controllers';
 
     /**
      * Register services.

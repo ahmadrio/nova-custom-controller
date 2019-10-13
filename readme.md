@@ -22,7 +22,7 @@
 
 ```json
 "require": {
-    "dot-nova/nova-custom-controllers": "*"
+    "pt-dot-playground/nova-custom-controllers": "*"
 },
 ...
 "repositories": [
@@ -43,7 +43,7 @@
 
 ```php
 ...
-use DotNova\NovaCustomControllers\Traits;
+use PtDotPlayground\NovaCustomControllers\Traits\NovaCustomControllers;
 
 abstract class Resource extends NovaResource
 {

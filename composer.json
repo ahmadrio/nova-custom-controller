@@ -1,5 +1,5 @@
 {
-    "name": "dot-nova/nova-custom-controllers",
+    "name": "pt-dot-playground/nova-custom-controllers",
     "description": "Make custom controller in Laravel Nova",
     "keywords": [
         "laravel",
@@ -17,15 +17,19 @@
     },
     "autoload": {
         "psr-4": {
-            "DotNova\\NovaCustomControllers\\": "src/"
+            "PtDotPlayground\\NovaCustomControllers\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "DotNova\\NovaCustomControllers\\NovaCustomControllersProvider"
+                "PtDotPlayground\\NovaCustomControllers\\NovaCustomControllersProvider"
             ]
         }
     },
-    "minimum-stability": "dev"
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

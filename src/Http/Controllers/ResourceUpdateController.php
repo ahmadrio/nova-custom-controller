@@ -1,6 +1,6 @@
 <?php
 
-namespace DotNova\NovaCustomControllers\Http\Controllers;
+namespace PtDotPlayground\NovaCustomControllers\Http\Controllers;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
