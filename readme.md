@@ -15,7 +15,7 @@
 2. Clone repository ini di folder `dot-packages/` namun dengan parameter folder `NovaCustomController`
 
 ```
-~packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controller.git NovaCustomController
+~dot-packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controller.git NovaCustomController
 ```
 
 3. Tambahkan line `composer.json`
