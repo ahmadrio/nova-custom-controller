@@ -2,8 +2,10 @@
 
 namespace PtDotPlayground\NovaCustomController;
 
+use App\Nova\Resource;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use PtDotPlayground\NovaCustomController\Traits\NovaCustomEvents;
 
 class NovaCustomControllerProvider extends ServiceProvider
 {
@@ -34,7 +36,12 @@ class NovaCustomControllerProvider extends ServiceProvider
     public function boot()
     {
         $this->app->booted(function () {
-            $this->routes();
+            $usingTrait = in_array(
+                NovaCustomEvents::class,
+                array_keys((new \ReflectionClass(Resource::class))->getTraits())
+            );
+
+            if ($usingTrait) $this->routes();
         });
     }
 

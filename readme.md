@@ -10,9 +10,9 @@
 
 ### Cara Install:
 
-1. Buat folder di proyek anda `packages/`
+1. Buat folder di proyek anda `dot-packages/`
 
-2. Clone repository ini di folder `packages/` namun dengan parameter folder `NovaCustomController`
+2. Clone repository ini di folder `dot-packages/` namun dengan parameter folder `NovaCustomController`
 
 ```
 ~packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controller.git NovaCustomController
@@ -29,7 +29,7 @@
     ...
     {
         "type": "path",
-        "url": "./packages/NovaCustomController"
+        "url": "./dot-packages/NovaCustomController"
     }
 ]
 ```
