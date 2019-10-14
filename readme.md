@@ -10,15 +10,7 @@
 
 ### Cara Install:
 
-1. Buat folder di proyek anda `dot-packages/`
-
-2. Clone repository ini di folder `dot-packages/` namun dengan parameter folder `NovaCustomController`
-
-```
-~dot-packages $: git clone https://gitlab.com/pt-dot-playground/nova-custom-controller.git NovaCustomController
-```
-
-3. Tambahkan line `composer.json`
+1. Tambahkan line `composer.json`
 
 ```json
 "require": {
@@ -28,14 +20,20 @@
 "repositories": [
     ...
     {
-        "type": "path",
-        "url": "./dot-packages/NovaCustomController"
+        "type": "git",
+        "url": "https://gitlab.com/pt-dot-playground/nova-custom-controller.git"
     }
-]
+],
+"config": {
+    ...
+    "gitlab-token": {
+        "gitlab.com": "hDTLd7YF-LmxpzbE488v"
+    }
+},
 ```
 
-4. Kemudian jalankan command: `composer update`
-5. Selesai
+2. Kemudian jalankan command: `composer update`
+3. Selesai
 
 ### Cara Penggunaan:
 
