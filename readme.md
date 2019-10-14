@@ -107,6 +107,7 @@ class User extends Resource
 - [ ] Delete Controller
 - [ ] Attach Controller
 - [ ] Action Controller
+- [x] Fix `NovaCustomEvents` is not used in `app/Nova/Resource.php`
 - [x] Add your request in issue
 
 #### Terima kasih buat:
