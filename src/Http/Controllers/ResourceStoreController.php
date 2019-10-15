@@ -21,36 +21,50 @@ class ResourceStoreController extends Controller
 
         $resource::authorizeToCreate($request);
 
-        $resource::validateForCreation($request);
+        if (method_exists($resource, 'customStoreController')) {
+            return $resource::customStoreController($request, $resource::newModel());
+        } else {
+            $resource::validateForCreation($request);
 
-        $model = DB::transaction(function () use ($request, $resource) {
-            [$model, $callbacks] = $resource::fill(
-                $request, $resource::newModel()
-            );
+            $model = DB::transaction(function () use ($request, $resource) {
+                [$model, $callbacks] = $resource::fill(
+                    $request, $resource::newModel()
+                );
 
-            $resource::beforeCreated($request, $model);
+                if (method_exists($resource, 'beforeCreated')) {
+                    $resource::beforeCreated($request, $model);
+                }
 
-            if ($request->viaRelationship()) {
-                $request->findParentModelOrFail()
-                        ->{$request->viaRelationship}()
-                        ->save($model);
-            } else {
-                $model->save();
-            }
+                if (isset($resource::$unsetCustomFields) && count($resource::$unsetCustomFields) > 0) {
+                    foreach ($resource::$unsetCustomFields as $field) unset($model->$field);
+                }
 
-            ActionEvent::forResourceCreate($request->user(), $model)->save();
+                if ($request->viaRelationship()) {
+                    if (isset($resource::$autoSaveRelations) || $resource::$autoSaveRelations) {
+                        $request->findParentModelOrFail()
+                            ->{$request->viaRelationship}()
+                            ->save($model);
+                    }
+                } else {
+                    $model->save();
+                }
 
-            $resource::afterCreated($request, $model);
+                ActionEvent::forResourceCreate($request->user(), $model)->save();
 
-            collect($callbacks)->each->__invoke();
+                if (method_exists($resource, 'afterCreated')) {
+                    $resource::afterCreated($request, $model);
+                }
 
-            return $model;
-        });
+                collect($callbacks)->each->__invoke();
 
-        return response()->json([
-            'id' => $model->getKey(),
-            'resource' => $model->attributesToArray(),
-            'redirect' => $resource::redirectAfterCreate($request, $request->newResourceWith($model)),
-        ], 201);
+                return $model;
+            });
+
+            return response()->json([
+                'id' => $model->getKey(),
+                'resource' => $model->attributesToArray(),
+                'redirect' => $resource::redirectAfterCreate($request, $request->newResourceWith($model)),
+            ], 201);
+        }
     }
 }

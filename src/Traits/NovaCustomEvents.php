@@ -8,10 +8,24 @@ use Illuminate\Http\Request;
 trait NovaCustomEvents
 {
     /**
+     * Remove custom fields in model after submit button
+     *
+     * @var array
+     */
+    public static $unsetCustomFields = [];
+
+    /**
+     * Set auto save relations from eloquent
+     *
+     * @var bool
+     */
+    public static $autoSaveRelations = true;
+
+    /**
      * Before updated in controller
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Request $request
+     * @param Model $model
      */
     public static function beforeUpdated(Request $request, Model $model)
     {}
@@ -19,8 +33,8 @@ trait NovaCustomEvents
     /**
      * After updated in controller
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Request $request
+     * @param Model $model
      */
     public static function afterUpdated(Request $request, Model $model)
     {}
@@ -28,8 +42,8 @@ trait NovaCustomEvents
     /**
      * Before created in controller
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Request $request
+     * @param Model $model
      */
     public static function beforeCreated(Request $request, Model $model)
     {}
@@ -37,9 +51,27 @@ trait NovaCustomEvents
     /**
      * After created in controller
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Request $request
+     * @param Model $model
      */
     public static function afterCreated(Request $request, Model $model)
+    {}
+
+    /**
+     * Custom store controller
+     *
+     * @param Request $request
+     * @param Model $model
+     */
+    public static function customStoreController(Request $request, Model $model)
+    {}
+
+    /**
+     * Custom update controller
+     *
+     * @param Request $request
+     * @param Model $model
+     */
+    public static function customUpdateController(Request $request, Model $model)
     {}
 }

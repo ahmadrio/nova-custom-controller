@@ -23,35 +23,47 @@ class ResourceUpdateController extends Controller
 
         $resource = $request->resource();
 
-        $resource::validateForUpdate($request);
+        if (method_exists($resource, 'customUpdateController')) {
+            return $resource::customUpdateController($request, $resource::newModel());
+        } else {
+            $resource::validateForUpdate($request);
 
-        $model = DB::transaction(function () use ($request, $resource) {
-            $model = $request->findModelQuery()->lockForUpdate()->firstOrFail();
+            $model = DB::transaction(function () use ($request, $resource) {
+                $model = $request->findModelQuery()->lockForUpdate()->firstOrFail();
 
-            if ($this->modelHasBeenUpdatedSinceRetrieval($request, $model)) {
-                return response('', 409)->throwResponse();
-            }
+                if ($this->modelHasBeenUpdatedSinceRetrieval($request, $model)) {
+                    return response('', 409)->throwResponse();
+                }
 
-            [$model, $callbacks] = $resource::fillForUpdate($request, $model);
+                [$model, $callbacks] = $resource::fillForUpdate($request, $model);
 
-            $resource::beforeUpdated($request, $model);
+                if (method_exists($resource, 'beforeUpdated')) {
+                    $resource::beforeUpdated($request, $model);
+                }
 
-            ActionEvent::forResourceUpdate($request->user(), $model)->save();
+                if (isset($resource::$unsetCustomFields) && count($resource::$unsetCustomFields) > 0) {
+                    foreach ($resource::$unsetCustomFields as $field) unset($model->$field);
+                }
 
-            $model->save();
+                ActionEvent::forResourceUpdate($request->user(), $model)->save();
 
-            $resource::afterUpdated($request, $model);
+                $model->save();
 
-            collect($callbacks)->each->__invoke();
+                if (method_exists($resource, 'afterUpdated')) {
+                    $resource::afterUpdated($request, $model);
+                }
 
-            return $model;
-        });
+                collect($callbacks)->each->__invoke();
 
-        return response()->json([
-            'id' => $model->getKey(),
-            'resource' => $model->attributesToArray(),
-            'redirect' => $resource::redirectAfterUpdate($request, $request->newResourceWith($model)),
-        ]);
+                return $model;
+            });
+
+            return response()->json([
+                'id' => $model->getKey(),
+                'resource' => $model->attributesToArray(),
+                'redirect' => $resource::redirectAfterUpdate($request, $request->newResourceWith($model)),
+            ]);
+        }
     }
 
     /**
