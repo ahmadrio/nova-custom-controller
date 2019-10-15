@@ -24,7 +24,8 @@ class ResourceUpdateController extends Controller
         $resource = $request->resource();
 
         if (method_exists($resource, 'customUpdateController')) {
-            return $resource::customUpdateController($request, $resource::newModel());
+            $model = $request->findModelQuery()->lockForUpdate()->firstOrFail();
+            return $resource::customUpdateController($request, $model);
         } else {
             $resource::validateForUpdate($request);
 
