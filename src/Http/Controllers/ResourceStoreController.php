@@ -21,6 +21,10 @@ class ResourceStoreController extends Controller
 
         $resource::authorizeToCreate($request);
 
+        if (isset($resource::$setCustomRequests) && count($resource::$setCustomRequests) > 0) {
+            $request->request->add($resource::$setCustomRequests);
+        }
+
         if (method_exists($resource, 'customStoreController')) {
             return $resource::customStoreController($request, $resource::newModel());
         } else {

@@ -23,6 +23,10 @@ class ResourceUpdateController extends Controller
 
         $resource = $request->resource();
 
+        if (isset($resource::$setCustomRequests) && count($resource::$setCustomRequests) > 0) {
+            $request->request->add($resource::$setCustomRequests);
+        }
+
         if (method_exists($resource, 'customUpdateController')) {
             $model = $request->findModelQuery()->lockForUpdate()->firstOrFail();
             return $resource::customUpdateController($request, $model);

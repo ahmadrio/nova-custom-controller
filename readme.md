@@ -96,7 +96,20 @@ class User extends Resource
 }
 ```
 
-#### Daftar yang harus diselesaikan:
+#### Daftar method yang bisa digunakan:
+
+| Method Name | Type | Return | Description |
+|---|---|---|---|
+| `beforeCreated()` | `static function` | | Proses sebelum melakukan penyimpanan data baru |
+| `afterCreated()` | `static function` | | Proses setelah melakukan penyimpanan data baru |
+| `beforeUpdated()` | `static function` | | Proses sebelum melakukan penyimpanan data lama |
+| `afterUpdated()` | `static function` | | Proses setelah melakukan penyimpanan data lama |
+| `customStoreController()` | `static function` | | Custom full store process controller |
+| `customUpdateController()` | `static function` | | Custom full update process controller |
+| `$unsetCustomFields` | `static variable` | `array` | Unset model jika terdapat nama custom field yang tidak tersedia di `fillable` |
+| `$setCustomRequests` | `static variable` | `array` | Menambah request baru untuk melakukan process pada model |
+
+### Daftar yang harus diselesaikan:
 - [x] Custom route & controller for all resources
 - [ ] Custom route & controller for custom tools
 - [ ] Config to set custom links

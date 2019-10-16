@@ -8,11 +8,18 @@ use Illuminate\Http\Request;
 trait NovaCustomEvents
 {
     /**
-     * Remove custom fields in model after submit button
+     * Remove custom fields in model before submit button
      *
      * @var array
      */
     public static $unsetCustomFields = [];
+
+    /**
+     * Add custom requests in model before submit button
+     *
+     * @var array
+     */
+    public static $setCustomRequests = [];
 
     /**
      * Set auto save relations from eloquent
