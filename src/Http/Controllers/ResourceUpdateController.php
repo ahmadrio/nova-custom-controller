@@ -2,20 +2,25 @@
 
 namespace PtDotPlayground\NovaCustomController\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\ActionEvent;
 use Laravel\Nova\Http\Requests\UpdateResourceRequest;
+use ReflectionException;
 
 class ResourceUpdateController extends Controller
 {
     /**
      * Create a new resource.
      *
-     * @param \Laravel\Nova\Http\Requests\UpdateResourceRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param UpdateResourceRequest $request
+     * @return JsonResponse
+     * @throws AuthorizationException
+     * @throws ReflectionException
      */
     public function handle(UpdateResourceRequest $request)
     {
@@ -27,7 +32,7 @@ class ResourceUpdateController extends Controller
             $request->request->add($resource::$setCustomRequests);
         }
 
-        if (method_exists($resource, 'customUpdateController')) {
+        if (check_override_method($resource, 'customUpdateController')) {
             $model = $request->findModelQuery()->lockForUpdate()->firstOrFail();
             return $resource::customUpdateController($request, $model);
         } else {
@@ -42,7 +47,7 @@ class ResourceUpdateController extends Controller
 
                 [$model, $callbacks] = $resource::fillForUpdate($request, $model);
 
-                if (method_exists($resource, 'beforeUpdated')) {
+                if (check_override_method($resource, 'beforeUpdated')) {
                     $resource::beforeUpdated($request, $model);
                 }
 
@@ -54,7 +59,7 @@ class ResourceUpdateController extends Controller
 
                 $model->save();
 
-                if (method_exists($resource, 'afterUpdated')) {
+                if (check_override_method($resource, 'afterUpdated')) {
                     $resource::afterUpdated($request, $model);
                 }
 
@@ -74,8 +79,8 @@ class ResourceUpdateController extends Controller
     /**
      * Determine if the model has been updated since it was retrieved.
      *
-     * @param  \Laravel\Nova\Http\Requests\UpdateResourceRequest  $request
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param UpdateResourceRequest $request
+     * @param  Model  $model
      * @return bool
      */
     protected function modelHasBeenUpdatedSinceRetrieval(UpdateResourceRequest $request, $model)

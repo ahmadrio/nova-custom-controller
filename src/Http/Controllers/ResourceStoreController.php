@@ -2,18 +2,21 @@
 
 namespace PtDotPlayground\NovaCustomController\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\ActionEvent;
 use Laravel\Nova\Http\Requests\CreateResourceRequest;
+use ReflectionException;
 
 class ResourceStoreController extends Controller
 {
     /**
      * Create a new resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\CreateResourceRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param CreateResourceRequest $request
+     * @return JsonResponse
+     * @throws ReflectionException
      */
     public function handle(CreateResourceRequest $request)
     {
@@ -25,7 +28,7 @@ class ResourceStoreController extends Controller
             $request->request->add($resource::$setCustomRequests);
         }
 
-        if (method_exists($resource, 'customStoreController')) {
+        if (check_override_method($resource, 'customStoreController')) {
             return $resource::customStoreController($request, $resource::newModel());
         } else {
             $resource::validateForCreation($request);
@@ -35,7 +38,7 @@ class ResourceStoreController extends Controller
                     $request, $resource::newModel()
                 );
 
-                if (method_exists($resource, 'beforeCreated')) {
+                if (check_override_method($resource, 'beforeCreated')) {
                     $resource::beforeCreated($request, $model);
                 }
 
@@ -55,7 +58,7 @@ class ResourceStoreController extends Controller
 
                 ActionEvent::forResourceCreate($request->user(), $model)->save();
 
-                if (method_exists($resource, 'afterCreated')) {
+                if (check_override_method($resource, 'afterCreated')) {
                     $resource::afterCreated($request, $model);
                 }
 
