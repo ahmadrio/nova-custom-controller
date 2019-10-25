@@ -10,30 +10,11 @@
 
 ### Cara Install:
 
-1. Tambahkan line `composer.json`
-
-```json
-"require": {
-    "pt-dot-playground/nova-custom-controller": "*"
-},
-...
-"repositories": [
-    ...
-    {
-        "type": "git",
-        "url": "https://gitlab.com/pt-dot-playground/nova-custom-controller.git"
-    }
-],
-"config": {
-    ...
-    "gitlab-token": {
-        "gitlab.com": "hDTLd7YF-LmxpzbE488v"
-    }
-},
+1. Kemudian jalankan command:
 ```
-
-2. Kemudian jalankan command: `composer update`
-3. Selesai
+composer require opanegro/nova-custom-controller
+```
+2. Selesai
 
 ### Cara Penggunaan:
 
@@ -41,7 +22,7 @@
 
 ```php
 ...
-use PtDotPlayground\NovaCustomController\Traits\NovaCustomEvents;
+use Opanegro\NovaCustomController\Traits\NovaCustomEvents;
 
 abstract class Resource extends NovaResource
 {
@@ -65,34 +46,9 @@ class User extends Resource
      * @param \Illuminate\Database\Eloquent\Model $model
      */
     public static function beforeUpdated(Request $request, Model $model)
-    {}
-
-    /**
-     * After updated in controller
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model $model
-     */
-    public static function afterUpdated(Request $request, Model $model)
-    {}
-
-    /**
-     * Before created in controller
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model $model
-     */
-    public static function beforeCreated(Request $request, Model $model)
-    {}
-
-    /**
-     * After created in controller
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model $model
-     */
-    public static function afterCreated(Request $request, Model $model)
-    {}
+    {
+        // your codes
+    }
 }
 ```
 
@@ -123,9 +79,7 @@ class User extends Resource
 - [x] Add your request in issue
 
 #### Terima kasih buat:
-- Mas Ardi
-- Mas Didik
-- Mas Haris
-- Team Project SMI-Collateral
-
-> Semoga berguna dan bermanfaat buat teman-teman DOT Indonesia.
+- DOT Mas Ardi
+- DOT Mas Didik
+- DOT Mas Haris
+- DOT Team Projects

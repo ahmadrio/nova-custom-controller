@@ -1,11 +1,11 @@
 <?php
 
-namespace PtDotPlayground\NovaCustomController;
+namespace Opanegro\NovaCustomController;
 
 use App\Nova\Resource;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use PtDotPlayground\NovaCustomController\Traits\NovaCustomEvents;
+use Opanegro\NovaCustomController\Traits\NovaCustomEvents;
 
 class NovaCustomControllerProvider extends ServiceProvider
 {
@@ -16,7 +16,7 @@ class NovaCustomControllerProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'PtDotPlayground\NovaCustomController\Http\Controllers';
+    protected $namespace = 'Opanegro\NovaCustomController\Http\Controllers';
 
     /**
      * Register services.

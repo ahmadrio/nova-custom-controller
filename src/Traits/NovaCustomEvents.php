@@ -1,6 +1,6 @@
 <?php
 
-namespace PtDotPlayground\NovaCustomController\Traits;
+namespace Opanegro\NovaCustomController\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

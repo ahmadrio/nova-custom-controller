@@ -1,5 +1,5 @@
 {
-    "name": "pt-dot-playground/nova-custom-controller",
+    "name": "opanegro/nova-custom-controller",
     "description": "Make custom controller in Laravel Nova",
     "keywords": [
         "laravel",
@@ -17,13 +17,13 @@
     },
     "autoload": {
         "psr-4": {
-            "PtDotPlayground\\NovaCustomController\\": "src/"
+            "Opanegro\\NovaCustomController\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "PtDotPlayground\\NovaCustomController\\NovaCustomControllerProvider"
+                "Opanegro\\NovaCustomController\\NovaCustomControllerProvider"
             ]
         }
     },

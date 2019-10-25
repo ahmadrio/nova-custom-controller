@@ -1,6 +1,6 @@
 <?php
 
-namespace PtDotPlayground\NovaCustomController\Http\Controllers;
+namespace Opanegro\NovaCustomController\Http\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
