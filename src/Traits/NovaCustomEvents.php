@@ -81,4 +81,13 @@ trait NovaCustomEvents
      */
     public static function customUpdateController(Request $request, Model $model)
     {}
+
+    /**
+     * After create & update events
+     *
+     * @param Request $request
+     * @param Model $model
+     */
+    public static function afterSave(Request $request, Model $model)
+    {}
 }

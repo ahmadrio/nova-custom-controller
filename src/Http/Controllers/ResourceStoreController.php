@@ -62,6 +62,10 @@ class ResourceStoreController extends Controller
                     $resource::afterCreated($request, $model);
                 }
 
+                if (check_override_method($resource, 'afterSave')) {
+                    $resource::afterSave($request, $model);
+                }
+
                 collect($callbacks)->each->__invoke();
 
                 return $model;

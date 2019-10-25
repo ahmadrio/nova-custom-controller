@@ -63,6 +63,10 @@ class ResourceUpdateController extends Controller
                     $resource::afterUpdated($request, $model);
                 }
 
+                if (check_override_method($resource, 'afterSave')) {
+                    $resource::afterSave($request, $model);
+                }
+
                 collect($callbacks)->each->__invoke();
 
                 return $model;

@@ -104,6 +104,7 @@ class User extends Resource
 | `afterCreated()` | `static function` | | Proses setelah melakukan penyimpanan data baru |
 | `beforeUpdated()` | `static function` | | Proses sebelum melakukan penyimpanan data lama |
 | `afterUpdated()` | `static function` | | Proses setelah melakukan penyimpanan data lama |
+| `afterSave()` | `static function` | | Proses setelah melakukan penyimpanan data baru & lama |
 | `customStoreController()` | `static function` | | Custom full store process controller |
 | `customUpdateController()` | `static function` | | Custom full update process controller |
 | `$unsetCustomFields` | `static variable` | `array` | Unset model jika terdapat nama custom field yang tidak tersedia di `fillable` |
