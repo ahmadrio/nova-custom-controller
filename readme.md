@@ -1,5 +1,10 @@
 # Laravel Nova Custom Controller
 
+[![GitHub issues](https://img.shields.io/github/issues/opanegro/nova-custom-controller)](https://github.com/opanegro/nova-custom-controller/issues)
+[![GitHub forks](https://img.shields.io/github/forks/opanegro/nova-custom-controller)](https://github.com/opanegro/nova-custom-controller/network)
+[![GitHub stars](https://img.shields.io/github/stars/opanegro/nova-custom-controller)](https://github.com/opanegro/nova-custom-controller/stargazers)
+[![GitHub license](https://img.shields.io/github/license/opanegro/nova-custom-controller)](https://github.com/opanegro/nova-custom-controller/blob/master/LICENSE)
+
 **Package Nova Custom Controller** berfungsi untuk mengolah request tanpa perlu membuat controller baru, karna fitur ini sudah otomatis meng-override controller pada Laravel Nova anda.
 
 ### Required:
