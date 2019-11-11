@@ -61,6 +61,7 @@ class User extends Resource
 | `beforeUpdated()` | `static function` | | Proses sebelum melakukan penyimpanan data lama |
 | `afterUpdated()` | `static function` | | Proses setelah melakukan penyimpanan data lama |
 | `afterSave()` | `static function` | | Proses setelah melakukan penyimpanan data baru & lama |
+| `beforeSave()` | `static function` | | Proses sebelum melakukan penyimpanan data baru & lama |
 | `customStoreController()` | `static function` | | Custom full store process controller |
 | `customUpdateController()` | `static function` | | Custom full update process controller |
 | `$unsetCustomFields` | `static variable` | `array` | Unset model jika terdapat nama custom field yang tidak tersedia di `fillable` |
@@ -76,7 +77,10 @@ class User extends Resource
 - [ ] Attach Controller
 - [ ] Action Controller
 - [x] Fix `NovaCustomEvents` is not used in `app/Nova/Resource.php`
-- [x] Add your request in issue
+
+### Contribute:
+- If you help us, translate to english
+- Add your request or bug in issue
 
 #### Terima kasih buat:
 - DOT Mas Ardi

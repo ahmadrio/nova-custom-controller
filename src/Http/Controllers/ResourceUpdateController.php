@@ -2,15 +2,15 @@
 
 namespace Opanegro\NovaCustomController\Http\Controllers;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\JsonResponse;
+use ReflectionException;
 use Illuminate\Support\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\ActionEvent;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Access\AuthorizationException;
 use Laravel\Nova\Http\Requests\UpdateResourceRequest;
-use ReflectionException;
 
 class ResourceUpdateController extends Controller
 {
@@ -34,7 +34,9 @@ class ResourceUpdateController extends Controller
 
         if (check_override_method($resource, 'customUpdateController')) {
             $model = $request->findModelQuery()->lockForUpdate()->firstOrFail();
-            return $resource::customUpdateController($request, $model);
+            $model = $resource::customUpdateController($request, $model);
+
+            return $this->defaultResponseUpdate($model, $resource, $request);
         } else {
             $resource::validateForUpdate($request);
 
@@ -45,14 +47,22 @@ class ResourceUpdateController extends Controller
                     return response('', 409)->throwResponse();
                 }
 
-                [$model, $callbacks] = $resource::fillForUpdate($request, $model);
+                [
+                    $model,
+                    $callbacks,
+                ] = $resource::fillForUpdate($request, $model);
 
                 if (check_override_method($resource, 'beforeUpdated')) {
                     $resource::beforeUpdated($request, $model);
                 }
 
+                if (check_override_method($resource, 'beforeSave')) {
+                    $resource::beforeSave($request, $model);
+                }
+
                 if (isset($resource::$unsetCustomFields) && count($resource::$unsetCustomFields) > 0) {
-                    foreach ($resource::$unsetCustomFields as $field) unset($model->$field);
+                    foreach ($resource::$unsetCustomFields as $field)
+                        unset($model->$field);
                 }
 
                 ActionEvent::forResourceUpdate($request->user(), $model)->save();
@@ -72,11 +82,7 @@ class ResourceUpdateController extends Controller
                 return $model;
             });
 
-            return response()->json([
-                'id' => $model->getKey(),
-                'resource' => $model->attributesToArray(),
-                'redirect' => $resource::redirectAfterUpdate($request, $request->newResourceWith($model)),
-            ]);
+            return $this->defaultResponseUpdate($model, $resource, $request);
         }
     }
 
@@ -84,19 +90,36 @@ class ResourceUpdateController extends Controller
      * Determine if the model has been updated since it was retrieved.
      *
      * @param UpdateResourceRequest $request
-     * @param  Model  $model
+     * @param Model                 $model
      * @return bool
      */
     protected function modelHasBeenUpdatedSinceRetrieval(UpdateResourceRequest $request, $model)
     {
         $column = $model->getUpdatedAtColumn();
 
-        if (! $model->{$column}) {
+        if (!$model->{$column}) {
             return false;
         }
 
-        return $request->input('_retrieved_at') && $model->usesTimestamps() && $model->{$column}->gt(
-            Carbon::createFromTimestamp($request->input('_retrieved_at'))
-        );
+        return $request->input('_retrieved_at') && $model->usesTimestamps() && $model->{$column}->gt(Carbon::createFromTimestamp($request->input('_retrieved_at')));
+    }
+
+    /**
+     * Default response on update controller
+     *
+     * @param Model $model
+     * @param       $resource
+     * @param       $request
+     * @return JsonResponse
+     */
+    private function defaultResponseUpdate(Model $model, $resource, $request)
+    {
+        $data = [
+            'id' => $model->getKey(),
+            'resource' => $model->attributesToArray(),
+            'redirect' => $resource::redirectAfterUpdate($request, $request->newResourceWith($model)),
+        ];
+
+        return response_controller_json($data);
     }
 }
