@@ -19,7 +19,7 @@ if (!function_exists('check_override_method')) {
     }
 }
 
-if (function_exists('response_controller_json')) {
+if (!function_exists('response_controller_json')) {
     /**
      * Response controller
      *
