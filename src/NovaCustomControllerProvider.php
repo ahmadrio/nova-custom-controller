@@ -5,6 +5,7 @@ namespace Opanegro\NovaCustomController;
 use App\Nova\Resource;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Opanegro\NovaCustomController\Commands\NovaCustomControllerCommand;
 use Opanegro\NovaCustomController\Traits\NovaCustomEvents;
 
 class NovaCustomControllerProvider extends ServiceProvider
@@ -45,6 +46,8 @@ class NovaCustomControllerProvider extends ServiceProvider
 
             if ($usingTrait) $this->routes();
         });
+
+        $this->commands(NovaCustomControllerCommand::class);
     }
 
     /**

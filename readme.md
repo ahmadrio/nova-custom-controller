@@ -10,7 +10,7 @@
 ### Required:
 
 1. PHP Version >= 7.1
-2. Laravel >= 5.5
+2. Laravel >= 5.8
 3. Laravel Nova >= 2.0.7
 
 ### Cara Install:
@@ -57,6 +57,14 @@ class User extends Resource
 }
 ```
 
+#### Create Controller with command
+
+`php artisan nova:custom-controller User --event=store --custom-uri-key=users`
+
+- `User`: is the name of resource
+- `--event` or `-e`: is event if you want, available `store`, `update`
+- `--custom-uri-key` or `-c`: if you set the resource with custom uri key
+ 
 #### Daftar method yang bisa digunakan:
 
 | Method Name | Type | Return | Description |
@@ -72,17 +80,6 @@ class User extends Resource
 | `$unsetCustomFields` | `static variable` | `array` | Unset model jika terdapat nama custom field yang tidak tersedia di `fillable` |
 | `$setCustomRequests` | `static variable` | `array` | Menambah request baru untuk melakukan process pada model |
 
-### Daftar yang harus diselesaikan:
-- [x] Custom route & controller for all resources
-- [ ] Custom route & controller for custom tools
-- [ ] Config to set custom links
-- [x] Store Controller
-- [x] Update Controller
-- [ ] Delete Controller
-- [ ] Attach Controller
-- [ ] Action Controller
-- [x] Fix `NovaCustomEvents` is not used in `app/Nova/Resource.php`
-
 ### Contribute:
 - If you help us, translate to english
 - Add your request or bug in issue
@@ -92,3 +89,4 @@ class User extends Resource
 - DOT Mas Didik
 - DOT Mas Haris
 - DOT Team Projects
+- All DOT Rangers
