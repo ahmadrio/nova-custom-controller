@@ -100,10 +100,10 @@ class NovaCustomControllerCommand extends Command
 
         switch ($event) {
             case 'update':
-                $route = "\nRoute::put('/{any}/$uriKey/{resourceId}', 'Nova\\$name\\ResourceUpdateController@handle')->where(['any' => 'nova-api'])->name('nova.api.')->middleware('nova');";
+                $route = "\nRoute::put('/nova-api/{nova_resource}/{resourceId}', 'Nova\\$name\\ResourceUpdateController@handle')->where(['nova_resource' => '$uriKey'])->middleware('nova');";
                 break;
             default:
-                $route = "\nRoute::post('/{any}/$uriKey', 'Nova\\$name\\ResourceStoreController@handle')->where(['any' => 'nova-api'])->name('nova.api.')->middleware('nova');";
+                $route = "\nRoute::post('/nova-api/{nova_resource}', 'Nova\\$name\\ResourceStoreController@handle')->where(['nova_resource' => '$uriKey'])->middleware('nova');";
                 break;
         }
 
