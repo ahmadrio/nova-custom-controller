@@ -18,6 +18,7 @@ class ResourceStoreController extends Controller
      * @param CreateResourceRequest $request
      * @return JsonResponse
      * @throws ReflectionException
+     * @throws \Throwable
      */
     public function handle(CreateResourceRequest $request)
     {

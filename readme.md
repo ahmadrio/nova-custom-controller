@@ -11,7 +11,7 @@
 
 1. PHP Version >= 7.1
 2. Laravel >= 5.8
-3. Laravel Nova >= 2.0.7
+3. Laravel Nova >= 2.0
 
 ### Cara Install:
 
@@ -62,8 +62,8 @@ class User extends Resource
 `php artisan nova:custom-controller User --event=store --custom-uri-key=users`
 
 - `User`: is the name of resource
-- `--event` or `-e`: is event if you want, available `store`, `update`
-- `--custom-uri-key` or `-c`: if you set the resource with custom uri key
+- `--event`: is event if you want, available `store`, `update`
+- `--custom-uri-key`: if you set the resource with custom uri key
  
 #### Daftar method yang bisa digunakan:
 
@@ -88,5 +88,5 @@ class User extends Resource
 - DOT Mas Ardi
 - DOT Mas Didik
 - DOT Mas Haris
-- DOT Team Projects
-- All DOT Rangers
+- DOT Team Projek
+- DOT Rangers

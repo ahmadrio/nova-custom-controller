@@ -15,8 +15,8 @@ class NovaCustomControllerCommand extends Command
      */
     protected $signature = 'nova:custom-controller
                             {resource : Resource name}
-                            {--e|event=store : Event name [store,update]}
-                            {--c|custom-uri-key= : Custom uriKey if you modify uriKey}';
+                            {--event=store : Event name [store,update]}
+                            {--custom-uri-key= : Custom uriKey if you modify uriKey}';
 
     /**
      * The console command description.

@@ -11,9 +11,12 @@ if (!function_exists('check_override_method')) {
      */
     function check_override_method($class, $method)
     {
-        $reflectionMethod = new \ReflectionMethod($class, $method);
-        if ($reflectionMethod->getDeclaringClass()->getName() === $class) {
-            return true;
+        $reflectionClass = new ReflectionClass($class);
+        if ($reflectionClass->hasMethod($method)) {
+            $reflectionMethod = new \ReflectionMethod($class, $method);
+            if ($reflectionMethod->getDeclaringClass()->getName() === $class) {
+                return true;
+            }
         }
         return false;
     }

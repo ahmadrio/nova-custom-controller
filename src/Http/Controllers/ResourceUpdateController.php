@@ -21,6 +21,7 @@ class ResourceUpdateController extends Controller
      * @return JsonResponse
      * @throws AuthorizationException
      * @throws ReflectionException
+     * @throws \Throwable
      */
     public function handle(UpdateResourceRequest $request)
     {
